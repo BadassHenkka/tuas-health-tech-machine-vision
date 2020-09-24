@@ -54,6 +54,9 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'knox',
+
+    # Project django apps
+    'frontend',
 ]
 
 REST_FRAMEWORK = {
