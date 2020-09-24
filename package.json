@@ -2,9 +2,9 @@
   "name": "tuas-health-tech-machine-vision",
   "version": "1.0.0",
   "description": "TUAS Health Tech Lab Machine Vision website",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./machinevision/frontend/src/index.js --output ./machinevision/frontend/static/frontend/main.js",
+    "dev": "webpack-dev-server --config webpack.config.js",
     "build": "webpack --mode production ./machinevision/frontend/src/index.js --output ./machinevision/frontend/static/frontend/main.js"
   },
   "repository": {
@@ -25,7 +25,8 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",

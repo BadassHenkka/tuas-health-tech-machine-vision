@@ -7,7 +7,9 @@ This is a project in Turku University of Applied Sciences Health Technology lab.
 ## Setting up project locally
 
 ### Requirements
+
 Fork this repository and then clone it into your projects folder. For this project you need:
+
 - Python 3.6 or higher
 - pipenv (`pip3 install pipenv`) - https://pipenv-fork.readthedocs.io/en/latest/basics.html
 - NodeJS - https://nodejs.org/en/
@@ -24,7 +26,6 @@ https://www.postgresql.org/
 
 While not required for this project, if you are unfamiliar with running database commands through the terminal, then you might want to install pgAdmin which is a browser based UI for creating and handling postgres databases:
 https://www.pgadmin.org/
-
 
 ### Python packages
 
@@ -46,4 +47,4 @@ You can use the register page to create a regular user. If you want to access th
 
 ### Making changes in Javascript files (React.js)
 
-If you make changes in the Javascript files, besides having the django server running in a terminal, you need to have another terminal open where you have the `npm run dev` command running. This command makes webpack keep an eye on any changes in the JS files and builds them again when you make changes and save. Refresh the page to see the changes take effect.
+If you make changes in the Javascript files, besides having the django server running in a terminal, you need to have another terminal open where you have the `npm run dev` command running. This command builds the JS files and makes webpack keep an eye on any changes and builds the files again automatically when you save.
