@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'knox',
 
     # Project django apps
+    'accounts',
     'frontend',
 ]
 
