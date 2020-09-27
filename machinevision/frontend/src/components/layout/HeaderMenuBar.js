@@ -2,7 +2,7 @@ import React from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
-import { authTokenState } from '../../store';
+import { authTokenState, errorState, messageState } from '../../store';
 import { handleLogout } from '../../utils/auth';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 const HeaderMenuBar = ({ userState }) => {
   const classes = useStyles();
   const setAuthTokenState = useSetRecoilState(authTokenState);
+  const setErrorStatus = useSetRecoilState(errorState);
+  const setMessage = useSetRecoilState(messageState);
 
   const onLogoutClick = () => {
     handleLogout(userState.token)
@@ -35,10 +37,17 @@ const HeaderMenuBar = ({ userState }) => {
         setAuthTokenState({
           token: null,
         });
+        setMessage({
+          logoutSuccess: 'Logged out successfully.',
+        });
       })
       .catch((err) => {
-        // TODO: Add error handling
-        console.log(err);
+        // TODO: Test what message comes from this logout failure
+        // and add it to the alerts component (input wrong token for example)
+        setErrorStatus({
+          status: err.response.status,
+          msg: err.response.data,
+        });
       });
   };
 

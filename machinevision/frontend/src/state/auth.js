@@ -28,6 +28,7 @@ export const loadUserProfile = selector({
         const isAuthenticated = true;
         const user = res.data;
         const token = authToken.token;
+
         return {
           isAuthenticated,
           user,

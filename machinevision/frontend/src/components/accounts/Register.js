@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
-import { authTokenState } from '../../store';
+import { authTokenState, errorState, messageState } from '../../store';
 import { handleRegister } from '../../utils/auth';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
 const Register = ({ isAuthenticated }) => {
   const classes = useStyles();
   const setAuthTokenState = useSetRecoilState(authTokenState);
+  const setErrorStatus = useSetRecoilState(errorState);
+  const setMessage = useSetRecoilState(messageState);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,8 +49,9 @@ const Register = ({ isAuthenticated }) => {
   const onRegisterSubmit = (event) => {
     event.preventDefault();
     if (password !== password2) {
-      // TODO: Create appropriate error message
-      alert('Passwords do not match.');
+      setMessage({
+        passwordsDontMatch: 'Passwords do not match.',
+      });
     } else {
       handleRegister(username, email, password)
         .then((res) => {
@@ -56,13 +59,19 @@ const Register = ({ isAuthenticated }) => {
           setAuthTokenState({
             token: res.data.token,
           });
+          setMessage({
+            registerSuccess:
+              'Registered successfully. Request account activation from the site admin.',
+          });
         })
         .catch((err) => {
-          // TODO: Add error handling
-          console.log(err);
           localStorage.removeItem('token');
           setAuthTokenState({
             token: null,
+          });
+          setErrorStatus({
+            status: err.response.status,
+            msg: err.response.data,
           });
         });
     }

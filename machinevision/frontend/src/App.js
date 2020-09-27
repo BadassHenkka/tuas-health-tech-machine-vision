@@ -1,50 +1,42 @@
 import React, { Fragment, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot, useRecoilValue } from 'recoil';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 
 import { loadUserProfile } from './store';
 
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
+import Alerts from './components/layout/Alerts';
+import DashboardView from './views/DashboardView';
 import HeaderMenuBar from './components/layout/HeaderMenuBar';
+import Loader from './components/layout/Loader';
 import Login from './components/accounts/Login';
 import Register from './components/accounts/Register';
 
-const Dashboard = ({ isAuthenticated }) => {
-  if (!isAuthenticated) {
-    return <Redirect to='/login' />;
-  }
-
-  return (
-    <Typography
-      component='div'
-      style={{ backgroundColor: '#cfe8fc', height: '100vh' }}
-    ></Typography>
-  );
+// Alert Options
+const alertOptions = {
+  timeout: 4000,
+  position: 'top center',
 };
 
 const AppContainer = () => {
-  // TODO: Add error handling when authState returns an error
   const userState = useRecoilValue(loadUserProfile);
 
   return (
     <Router>
       <Fragment>
         <HeaderMenuBar userState={userState} />
+        <Alerts />
         <Container>
           <Switch>
             <Route
               exact
               path='/'
               render={() => (
-                <Dashboard isAuthenticated={userState.isAuthenticated} />
+                <DashboardView isAuthenticated={userState.isAuthenticated} />
               )}
             />
             <Route
@@ -69,13 +61,13 @@ const AppContainer = () => {
 };
 
 const App = () => {
-  // TODO: Add better fallback component
-
   return (
     <RecoilRoot>
-      <Suspense fallback={<div>Loading...</div>}>
-        <AppContainer />
-      </Suspense>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Suspense fallback={<Loader />}>
+          <AppContainer />
+        </Suspense>
+      </AlertProvider>
     </RecoilRoot>
   );
 };

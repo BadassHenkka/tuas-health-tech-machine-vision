@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
-import { authTokenState } from '../../store';
+import { authTokenState, errorState, messageState } from '../../store';
 import { handleLogin } from '../../utils/auth';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ isAuthenticated }) => {
   const classes = useStyles();
   const setAuthTokenState = useSetRecoilState(authTokenState);
+  const setErrorStatus = useSetRecoilState(errorState);
+  const setMessage = useSetRecoilState(messageState);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -50,13 +52,18 @@ const Login = ({ isAuthenticated }) => {
         setAuthTokenState({
           token: res.data.token,
         });
+        setMessage({
+          loginSuccess: `Welcome ${res.data.user.username}!`,
+        });
       })
       .catch((err) => {
-        // TODO: Add error handling
-        console.log(err);
         localStorage.removeItem('token');
         setAuthTokenState({
           token: null,
+        });
+        setErrorStatus({
+          status: err.response.status,
+          msg: err.response.data,
         });
       });
   };
