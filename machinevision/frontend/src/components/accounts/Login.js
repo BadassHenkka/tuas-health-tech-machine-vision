@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+
+import { authTokenState } from '../../store';
+import { handleLogin } from '../../utils/auth';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -32,20 +36,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({ isAuthenticated }) => {
   const classes = useStyles();
+  const setAuthTokenState = useSetRecoilState(authTokenState);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const onChange = (event) => {
-    console.log(event.target.name, event.target.value);
-  };
-
-  const onSubmit = (event) => {
+  const onLoginSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
+    handleLogin(username, password)
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
+        setAuthTokenState({
+          token: res.data.token,
+        });
+      })
+      .catch((err) => {
+        // TODO: Add error handling
+        console.log(err);
+        localStorage.removeItem('token');
+        setAuthTokenState({
+          token: null,
+        });
+      });
   };
 
   return (
     <Container component='main' maxWidth='xs'>
+      {isAuthenticated ? <Redirect to='/' /> : null}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -65,7 +83,7 @@ const Login = () => {
             name='username'
             autoComplete='username'
             autoFocus
-            onChange={onChange}
+            onChange={(event) => setUsername(event.target.value)}
           />
           <TextField
             variant='outlined'
@@ -77,7 +95,7 @@ const Login = () => {
             type='password'
             id='password'
             autoComplete='current-password'
-            onChange={onChange}
+            onChange={(event) => setPassword(event.target.value)}
           />
           <Button
             type='submit'
@@ -85,7 +103,7 @@ const Login = () => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={onSubmit}
+            onClick={onLoginSubmit}
           >
             Log In
           </Button>

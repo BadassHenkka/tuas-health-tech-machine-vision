@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+
+import { authTokenState } from '../../store';
+import { handleRegister } from '../../utils/auth';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -32,20 +36,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = ({ isAuthenticated }) => {
   const classes = useStyles();
+  const setAuthTokenState = useSetRecoilState(authTokenState);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
 
-  const onSubmit = (event) => {
+  const onRegisterSubmit = (event) => {
     event.preventDefault();
-    console.log(username, email, password, password2);
+    if (password !== password2) {
+      // TODO: Create appropriate error message
+      alert('Passwords do not match.');
+    } else {
+      handleRegister(username, email, password)
+        .then((res) => {
+          localStorage.setItem('token', res.data.token);
+          setAuthTokenState({
+            token: res.data.token,
+          });
+        })
+        .catch((err) => {
+          // TODO: Add error handling
+          console.log(err);
+          localStorage.removeItem('token');
+          setAuthTokenState({
+            token: null,
+          });
+        });
+    }
   };
 
   return (
     <Container component='main' maxWidth='xs'>
+      {isAuthenticated ? <Redirect to='/' /> : null}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -114,7 +139,7 @@ const Register = () => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={onSubmit}
+            onClick={onRegisterSubmit}
           >
             Register
           </Button>

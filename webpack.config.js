@@ -17,6 +17,10 @@ module.exports = {
         // regex test for js and jsx files
         test: /\.(js|jsx|mjs)?$/,
         // don't look in any node_modules/
+        // NOTE FOR MAKING PRODUCTION BUILD!!!
+        // if issues come up when building for production
+        // check if babel runtime regenerator needs to be whitelisted
+        // https://stackoverflow.com/a/49939402
         exclude: /node_modules/,
         // for matching files, use the babel-loader
         use: {
