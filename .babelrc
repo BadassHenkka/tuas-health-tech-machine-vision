@@ -1,4 +1,21 @@
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"],
-  "plugins": ["transform-class-properties"]
+  "plugins": [
+    "transform-class-properties",
+    [
+      // This is needed for making sure that
+      // async functions work properly
+      // Check recommended usage config from here
+      // https://babeljs.io/docs/en/babel-plugin-transform-runtime/#usage
+      "@babel/plugin-transform-runtime",
+      {
+        "absoluteRuntime": false,
+        "corejs": false,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false,
+        "version": "7.0.0-beta.0"
+      }
+    ]
+  ]
 }

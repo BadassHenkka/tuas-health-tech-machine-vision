@@ -1,22 +1,74 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { RecoilRoot, useRecoilValue } from 'recoil';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 
-import Typography from '@material-ui/core/Typography';
+import { loadUserProfile } from './store';
+
 import Container from '@material-ui/core/Container';
 
+import Alerts from './components/layout/Alerts';
+import DashboardView from './views/DashboardView';
 import HeaderMenuBar from './components/layout/HeaderMenuBar';
+import Loader from './components/layout/Loader';
+import Login from './components/accounts/Login';
+import Register from './components/accounts/Register';
+
+// Alert Options
+const alertOptions = {
+  timeout: 4000,
+  position: 'top center',
+};
+
+const AppContainer = () => {
+  const userState = useRecoilValue(loadUserProfile);
+
+  return (
+    <Router>
+      <Fragment>
+        <HeaderMenuBar userState={userState} />
+        <Alerts />
+        <Container>
+          <Switch>
+            <Route
+              exact
+              path='/'
+              render={() => (
+                <DashboardView isAuthenticated={userState.isAuthenticated} />
+              )}
+            />
+            <Route
+              exact
+              path='/login'
+              render={() => (
+                <Login isAuthenticated={userState.isAuthenticated} />
+              )}
+            />
+            <Route
+              exact
+              path='/register'
+              render={() => (
+                <Register isAuthenticated={userState.isAuthenticated} />
+              )}
+            />
+          </Switch>
+        </Container>
+      </Fragment>
+    </Router>
+  );
+};
 
 const App = () => {
   return (
-    <Fragment>
-      <HeaderMenuBar />
-      <Container>
-        <Typography
-          component='div'
-          style={{ backgroundColor: '#cfe8fc', height: '100vh' }}
-        />
-      </Container>
-    </Fragment>
+    <RecoilRoot>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Suspense fallback={<Loader />}>
+          <AppContainer />
+        </Suspense>
+      </AlertProvider>
+    </RecoilRoot>
   );
 };
 
