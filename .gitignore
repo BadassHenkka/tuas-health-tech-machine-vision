@@ -5,7 +5,7 @@ node_modules
 npm-debug.log*
 .vscode
 .dev-notes.txt
-machinevision/frontend/static/frontend/main.js
+machinevision/frontend/static/frontend/*
 
 ### Django ###
 *.log

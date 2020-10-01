@@ -6,7 +6,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import WebcamStream from '../components/streaming/WebcamStream';
+import WebcamStream from '../../components/streaming/WebcamStream/WebcamStream';
+
+import './DashboardView.css';
 
 const DashboardView = ({ isAuthenticated }) => {
   if (!isAuthenticated) {
@@ -16,10 +18,7 @@ const DashboardView = ({ isAuthenticated }) => {
   const [camEnabled, setCamEnabled] = useState(false);
 
   return (
-    <Typography
-      component='div'
-      style={{ backgroundColor: '#cfe8fc', height: '100vh' }}
-    >
+    <Typography component='div' className='dashboard-container'>
       <Grid
         container
         direction='column'

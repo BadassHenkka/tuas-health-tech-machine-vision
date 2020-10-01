@@ -8,28 +8,48 @@ This is a project in Turku University of Applied Sciences Health Technology lab.
 
 ### Backend
 
-Backend is done with Django and Django REST framework where have API endpoints that are consumed by the frontend Django app built with React which then handles all the frontend views.
+Backend is done with Django and Django REST framework where we have API endpoints that are consumed by the frontend Django app built with React which then handles all the frontend views.
 
-https://www.djangoproject.com/
-https://www.django-rest-framework.org/
+[Django](https://www.djangoproject.com/)
+[Django REST Framework](https://www.django-rest-framework.org/)
 
 Authentication:
-https://www.django-rest-framework.org/api-guide/authentication/#django-rest-knox
+[Django REST Knox](https://www.django-rest-framework.org/api-guide/authentication/#django-rest-knox)
 
 ### Frontend
 
-https://reactjs.org/
+The Django frontend app has one template in `frontend/templates/frontend/index.html` where the compiled Javascript and CSS is inserted.
+
+[React](https://reactjs.org/)
 
 UI components:
-https://material-ui.com/
+[Material-UI](https://material-ui.com/)
 
 React state management:
-https://recoiljs.org/
+[Recoil](https://recoiljs.org/)
 
 Fetching data from backend API endpoints:
-https://www.npmjs.com/package/axios
+[Axios](https://www.npmjs.com/package/axios)
 
-Babel and webpack are used for compiling all the JS and CSS.
+Compiling Javascript and CSS with hot reloading:
+[Webpack](https://webpack.js.org/)
+[Babel](https://babeljs.io/)
+
+## Ideas, tutorials and inspiration used for the project
+
+### Combining Django and React
+
+[Brad Traversy - Full Stack React & Django](https://www.youtube.com/watch?v=Uyei2iDA4Hs&list=PLillGF-RfqbbRA-CIUxlxkUpbq0IFkX60&ab_channel=TraversyMedia)
+
+### Using Recoil for React state management
+
+[Recoil tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
+
+### Sources for configuring webpack
+
+[Webpack setup with hot reloading](https://hackernoon.com/how-to-bring-live-reloading-back-to-a-django-and-react-project-ilf3ubm)
+
+[Configuring CSS with webpack](https://blog.jakoblind.no/css-modules-webpack/)
 
 ## Setting up project locally
 
@@ -38,8 +58,8 @@ Babel and webpack are used for compiling all the JS and CSS.
 Fork this repository and then clone it into your projects folder. For this project you need:
 
 - Python 3.6 or higher
-- pipenv (`pip3 install pipenv`) - https://pipenv-fork.readthedocs.io/en/latest/basics.html
-- NodeJS - https://nodejs.org/en/
+- pipenv (`pip3 install pipenv`) - [Pipenv docs](https://pipenv-fork.readthedocs.io/en/latest/basics.html)
+- [NodeJS](https://nodejs.org/en/)
 - Some database engine (relational db) installed in your system ie. postgres or mysql
 
 ### Create database
@@ -52,11 +72,9 @@ Copy the .env.template file and rename it to .env . Configure it as is instructe
 
 This means that you need to have some database system installed in your computer, a database created for this project and then use that in the .env file.
 
-For database engine we recommend postgres:
-https://www.postgresql.org/
+For database engine we recommend [postgres](https://www.postgresql.org/)
 
-While not required for this project, if you are unfamiliar with running database commands through the terminal, then you might want to install pgAdmin which is a browser based UI for creating and handling postgres databases:
-https://www.pgadmin.org/
+While not required for this project, if you are unfamiliar with running database commands through the terminal, then you might want to install [pgAdmin](https://www.pgadmin.org/) which is a browser based UI for creating and handling postgres databases.
 
 ### Python packages
 

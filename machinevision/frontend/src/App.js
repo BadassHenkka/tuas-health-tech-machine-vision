@@ -9,12 +9,12 @@ import { loadUserProfile } from './store';
 
 import Container from '@material-ui/core/Container';
 
-import Alerts from './components/layout/Alerts';
-import DashboardView from './views/DashboardView';
-import HeaderMenuBar from './components/layout/HeaderMenuBar';
-import Loader from './components/layout/Loader';
-import Login from './components/accounts/Login';
-import Register from './components/accounts/Register';
+import Alerts from './components/layout/Alerts/Alerts';
+import DashboardView from './views/DashboardView/DashboardView';
+import HeaderMenuBar from './components/layout/HeaderMenuBar/HeaderMenuBar';
+import Loader from './components/layout/Loader/Loader';
+import Login from './components/accounts/Login/Login';
+import Register from './components/accounts/Register/Register';
 
 // Alert Options
 const alertOptions = {

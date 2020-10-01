@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { useAlert } from 'react-alert';
 
-import { errorState, messageState } from '../../store';
+import { errorState, messageState } from '../../../store';
 
 const Alerts = () => {
   const alert = useAlert();
