@@ -86,9 +86,11 @@ Next run `npm install` to install all the required npm packages from package.jso
 
 ### Running locally
 
-In the project folder (where we have manage.py file) run `python manage.py runserver`. This starts the development server and if not specified in the runserver command, by default it will run here - http://127.0.0.1:8000/
+In the project folder where we have the package.json file, run the command `npm run dev`. This will create a new folder machinevision/frontend/static/frontend, build all the JS files into a main.js file under this folder and also compile any assets like images into this folder as well. Leave this terminal window open.
 
-Open up a second terminal and navigate to the project folder where we have the package.json file and run `npm run dev`.
+Open another terminal and in the project folder (where we have manage.py file) run `python manage.py runserver`. This starts the development server and if not specified in the runserver command, by default it will run here - http://127.0.0.1:8000/
+
+If this is the first time you're setting up this project, you will notice in the terminal that you're being prompted to make database migrations. Shut down the server with ctrl+C and run the command `python manage.py migrate`. This will prime your database with all the needed database models. Now start the server again with `python manage.py runserver`.
 
 Now you should be able to see the project website in your localhost.
 
