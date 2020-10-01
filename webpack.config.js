@@ -1,3 +1,9 @@
+// Configuring webpack for hot reloading using React and django restframework as backend
+// https://hackernoon.com/how-to-bring-live-reloading-back-to-a-django-and-react-project-ilf3ubm
+
+// How to configure CSS with webpack
+// https://blog.jakoblind.no/css-modules-webpack/
+
 const path = require('path');
 
 module.exports = {
@@ -27,6 +33,20 @@ module.exports = {
           loader: 'babel-loader',
           options: { presets: ['@babel/env', '@babel/preset-react'] },
         },
+      },
+      // CSS conf
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      // conf for using assets - ie. background: url('some-image.png');
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },

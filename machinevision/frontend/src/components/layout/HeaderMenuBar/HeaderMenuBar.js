@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
-import { authTokenState, errorState, messageState } from '../../store';
-import { handleLogout } from '../../utils/auth';
+import { authTokenState, errorState, messageState } from '../../../store';
+import { handleLogout } from '../../../utils/auth';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';

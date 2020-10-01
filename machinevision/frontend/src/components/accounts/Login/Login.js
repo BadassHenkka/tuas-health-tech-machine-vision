@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
-import { authTokenState, errorState, messageState } from '../../store';
-import { handleLogin } from '../../utils/auth';
+import { authTokenState, errorState, messageState } from '../../../store';
+import { handleLogin } from '../../../utils/auth';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
