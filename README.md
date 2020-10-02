@@ -103,3 +103,5 @@ You can use the register page to create a regular user. If you want to access th
 If you make changes in the Javascript files, besides having the django server running in a terminal, you need to have another terminal open where you have the `npm run dev` command running. This command builds the JS files and has webpack keep an eye on any changes and builds the files again automatically when you save.
 
 The files will be built under `machinevision/frontend/static/frontend/` into a file named `main.js`. This file is configured to be ignored by git in the .gitignore file because there can be huge changes in the file even if you do just small changes in the React files. The compiled file will also always have some differences based on the user and their personal file structure on their operating system.
+
+This is a great project.
