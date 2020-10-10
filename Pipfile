@@ -14,6 +14,7 @@ django-rest-knox = "*"
 dj-database-url = "*"
 django-environ = "*"
 psycopg2-binary = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.6"

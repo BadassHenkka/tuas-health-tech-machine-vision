@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # Project django apps
     'accounts',
     'frontend',
+    'streaming',
 ]
 
 REST_FRAMEWORK = {

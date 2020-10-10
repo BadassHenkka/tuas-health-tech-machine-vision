@@ -22,4 +22,5 @@ urlpatterns = [
     # Project app urls
     path('', include('frontend.urls')),
     path('', include('accounts.urls')),
+    path('', include('streaming.urls')),
 ]

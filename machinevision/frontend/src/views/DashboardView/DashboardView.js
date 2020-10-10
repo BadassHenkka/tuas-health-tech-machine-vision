@@ -34,7 +34,14 @@ const DashboardView = ({ isAuthenticated }) => {
         <Button
           variant='contained'
           color='primary'
-          onClick={() => setCamEnabled(!camEnabled)}
+          // When the streaming component gets unmounted,
+          // a reload of the page is needed to make sure
+          // the streaming is stopped
+          onClick={() =>
+            !camEnabled
+              ? setCamEnabled(true)
+              : setCamEnabled(false) & window.location.reload()
+          }
         >
           {camEnabled ? 'Turn off' : 'Turn on'}
         </Button>
