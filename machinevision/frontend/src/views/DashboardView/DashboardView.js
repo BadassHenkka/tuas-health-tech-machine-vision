@@ -10,7 +10,7 @@ import WebcamStream from '../../components/streaming/WebcamStream/WebcamStream';
 
 import './DashboardView.css';
 
-const DashboardView = ({ isAuthenticated }) => {
+const DashboardView = ({ user, isAuthenticated }) => {
   if (!isAuthenticated) {
     return <Redirect to='/login' />;
   }
@@ -28,7 +28,7 @@ const DashboardView = ({ isAuthenticated }) => {
       >
         {camEnabled && (
           <Box mb={3}>
-            <WebcamStream />
+            <WebcamStream user={user} />
           </Box>
         )}
         <Button

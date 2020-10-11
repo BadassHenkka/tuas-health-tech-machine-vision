@@ -36,7 +36,10 @@ const AppContainer = () => {
               exact
               path='/'
               render={() => (
-                <DashboardView isAuthenticated={userState.isAuthenticated} />
+                <DashboardView
+                  user={userState.user}
+                  isAuthenticated={userState.isAuthenticated}
+                />
               )}
             />
             <Route

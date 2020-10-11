@@ -1,5 +1,6 @@
-import cv2
 import os
+
+import cv2
 from django.conf import settings
 
 # TODO: Change the data and logic here

@@ -1,13 +1,8 @@
 import React from 'react';
 
-const WebcamStream = () => {
-  // TODO: Need to do something better here
-  // for authenticating access to the video feed
-
+const WebcamStream = ({ user }) => {
   return (
-    <>
-      <img src='/video_feed'></img>
-    </>
+    <img src={`/video_feed?user=${user.username}`} alt={'Loading...'}></img>
   );
 };
 
