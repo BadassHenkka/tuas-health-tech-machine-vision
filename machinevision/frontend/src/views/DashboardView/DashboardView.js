@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import WebcamStream from '../../components/streaming/WebcamStream/WebcamStream';
+import Stream from '../../components/streaming/Stream/Stream';
 
 import './DashboardView.css';
 
@@ -26,11 +26,6 @@ const DashboardView = ({ isAuthenticated }) => {
         alignItems='center'
         style={{ minHeight: '80vh' }}
       >
-        {camEnabled && (
-          <Box mb={3}>
-            <WebcamStream />
-          </Box>
-        )}
         <Button
           variant='contained'
           color='primary'
@@ -38,6 +33,11 @@ const DashboardView = ({ isAuthenticated }) => {
         >
           {camEnabled ? 'Turn off' : 'Turn on'}
         </Button>
+        {camEnabled && (
+          <Box mb={3}>
+            <Stream />
+          </Box>
+        )}
       </Grid>
     </Typography>
   );
