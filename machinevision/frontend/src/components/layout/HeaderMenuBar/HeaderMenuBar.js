@@ -63,7 +63,7 @@ const HeaderMenuBar = ({ userState }) => {
             variant='h6'
             className={classes.title}
           >
-            Health Tech Lab - Machine Vision
+            Seppo
           </Link>
           {userState.isAuthenticated && (
             <>
