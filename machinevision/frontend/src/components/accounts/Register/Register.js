@@ -48,7 +48,15 @@ const Register = ({ isAuthenticated }) => {
 
   const onRegisterSubmit = (event) => {
     event.preventDefault();
-    if (password !== password2) {
+    if (password.length < 6 || password2.length < 6) {
+      setMessage({
+        passwordTooShort: 'Password must be at least 6 characters long.',
+      });
+    } else if (password.search (/\d/) == -1) {
+      setMessage({
+        passwordHasNoNumber: 'Password must contain at least 1 number.',
+      });
+    } else if (password !== password2) {
       setMessage({
         passwordsDontMatch: 'Passwords do not match.',
       });

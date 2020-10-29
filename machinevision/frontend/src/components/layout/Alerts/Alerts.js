@@ -39,6 +39,12 @@ const Alerts = () => {
       if (message.passwordsDontMatch) {
         alert.info(message.passwordsDontMatch);
       }
+      if (message.passwordHasNoNumber) {
+        alert.info(message.passwordHasNoNumber);
+      }
+      if (message.passwordTooShort) {
+        alert.info(message.passwordTooShort);
+      }
       resetMessage();
     }
   }, [errorStatus, message]);
