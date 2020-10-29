@@ -3,6 +3,7 @@
 
 node_modules
 npm-debug.log*
+.idea
 .vscode
 .dev-notes.txt
 machinevision/frontend/static/frontend/*
