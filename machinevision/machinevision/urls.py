@@ -20,6 +20,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Project app urls
+
+    # IMPORTANT!!!
+    # Frontend urls has some regex that allows the frontend to handle routing
+    # which is done by using React Router
+    # If you need to work on Django REST framework APIs and you want to see
+    # the available API endpoints in the browser, then check the comments
+    # in frontend.urls
     path('', include('frontend.urls')),
     path('', include('accounts.urls')),
+    path('', include('alarms.urls')),
 ]
