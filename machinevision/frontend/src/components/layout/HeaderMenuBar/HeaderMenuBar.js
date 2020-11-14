@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -53,7 +56,7 @@ const HeaderMenuBar = ({ userState }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='fixed' className={classes.appBar}>
         <Toolbar>
           <Link
             component={RouterLink}

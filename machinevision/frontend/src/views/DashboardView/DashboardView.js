@@ -1,44 +1,98 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import clsx from 'clsx';
 
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import AlarmList from '../../components/alarms/AlarmList/AlarmList';
 import WebcamStream from '../../components/streaming/WebcamStream/WebcamStream';
+import { alarmDrawerWidth, cameraGrowTimeout } from '../../constants';
 
 import './DashboardView.css';
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: alarmDrawerWidth,
+  },
+  cameraButton: {
+    marginTop: 10,
+  },
+}));
 
 const DashboardView = ({ isAuthenticated }) => {
   if (!isAuthenticated) {
     return <Redirect to='/login' />;
   }
 
+  const classes = useStyles();
   const [camEnabled, setCamEnabled] = useState(false);
+  const [camBtnDisabled, setCamBtnDisabled] = useState(false);
+  const [grow, setGrow] = useState(false);
+  const [alarmDrawerOpen, setAlarmDrawerOpen] = useState(false);
+
+  const handleCameraOn = () => {
+    setCamBtnDisabled(true);
+    setGrow(true);
+    setCamEnabled(true);
+    setTimeout(() => {
+      setCamBtnDisabled(false);
+    }, cameraGrowTimeout);
+  };
+
+  const handleCameraOff = () => {
+    setCamBtnDisabled(true);
+    setGrow(false);
+    setTimeout(() => {
+      setCamEnabled(false);
+      setCamBtnDisabled(false);
+    }, cameraGrowTimeout);
+  };
 
   return (
     <Typography component='div' className='dashboard-container'>
-      <Grid
-        container
-        direction='column'
-        justify='center'
-        alignItems='center'
-        style={{ minHeight: '80vh' }}
+      <AlarmList open={alarmDrawerOpen} />
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: alarmDrawerOpen,
+        })}
       >
-        {camEnabled && (
-          <Box mb={3}>
-            <WebcamStream />
-          </Box>
-        )}
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={() => setCamEnabled(!camEnabled)}
+        <Grid
+          container
+          direction='column'
+          justify='center'
+          alignItems='center'
+          style={{ minHeight: '80vh' }}
         >
-          {camEnabled ? 'Turn off' : 'Turn on'}
-        </Button>
-      </Grid>
+          <WebcamStream grow={grow} camEnabled={camEnabled} />
+          <Button
+            disabled={camBtnDisabled}
+            className={classes.cameraButton}
+            variant='contained'
+            color='primary'
+            onClick={() => {
+              camEnabled === false ? handleCameraOn() : handleCameraOff();
+              setAlarmDrawerOpen(!alarmDrawerOpen);
+            }}
+          >
+            {camEnabled ? 'Turn off' : 'Turn on'}
+          </Button>
+        </Grid>
+      </main>
     </Typography>
   );
 };
