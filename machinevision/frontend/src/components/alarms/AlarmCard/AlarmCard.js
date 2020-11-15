@@ -36,12 +36,6 @@ const useStyles = makeStyles((theme) => ({
   acknowledgedFalse: {
     color: 'red',
   },
-  paper: {
-    border: '1px solid',
-    padding: theme.spacing(1),
-    backgroundColor: theme.palette.background.paper,
-    zIndex: 100000,
-  },
   acknowledgeText: {
     color: 'gray',
     fontSize: 15,

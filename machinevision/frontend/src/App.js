@@ -21,6 +21,9 @@ import Register from './components/accounts/Register/Register';
 const alertOptions = {
   timeout: 4000,
   position: 'top center',
+  containerStyle: {
+    zIndex: 10000,
+  },
 };
 
 const AppContainer = () => {
