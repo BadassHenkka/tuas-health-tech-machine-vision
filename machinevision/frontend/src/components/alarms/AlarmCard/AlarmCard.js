@@ -11,6 +11,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { acknowledgeAlarm } from '../../../utils/alarms';
+import { formatTime } from '../../../utils/time';
 
 const useStyles = makeStyles((theme) => ({
   iconAndText: {
@@ -43,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
   },
   acknowledgeText: {
     color: 'gray',
-    marginLeft: 10,
     fontSize: 15,
   },
   center: {
@@ -61,6 +61,8 @@ const AlarmCard = ({ alarm, authToken }) => {
   });
 
   let ListItemContent = ({ itemData }) => {
+    const alarmTime = formatTime(itemData.created_at);
+
     return (
       <ListItem
         button
@@ -77,18 +79,18 @@ const AlarmCard = ({ alarm, authToken }) => {
           >
             <WarningIcon className={classes.icon} />
             <ListItemText primary='Alarm' />
-            {!itemData.acknowledged && (
-              <ListItemText
-                primary='Acknowledge'
-                classes={{ primary: classes.acknowledgeText }}
-              />
-            )}
           </ListItemIcon>
+          {!itemData.acknowledged && (
+            <ListItemText
+              primary='Click to Acknowledge'
+              classes={{ primary: classes.acknowledgeText }}
+            />
+          )}
         </Container>
         <Container>
           <Typography>
             <span className={classes.bold}>Time: </span>
-            {itemData.created_at}
+            {alarmTime}
           </Typography>
           <Typography>
             <span className={classes.bold}>Acknowledged: </span>
