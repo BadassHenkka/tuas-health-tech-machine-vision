@@ -46,6 +46,7 @@ const DashboardView = ({ isAuthenticated }) => {
   const [alarmDrawerOpen, setAlarmDrawerOpen] = useState(false);
 
   const handleCameraOn = () => {
+    setAlarmDrawerOpen(true);
     setCamBtnDisabled(true);
     setGrow(true);
     setCamEnabled(true);
@@ -55,6 +56,7 @@ const DashboardView = ({ isAuthenticated }) => {
   };
 
   const handleCameraOff = () => {
+    setAlarmDrawerOpen(false);
     setCamBtnDisabled(true);
     setGrow(false);
     setTimeout(() => {
@@ -86,7 +88,6 @@ const DashboardView = ({ isAuthenticated }) => {
             color='primary'
             onClick={() => {
               camEnabled === false ? handleCameraOn() : handleCameraOff();
-              setAlarmDrawerOpen(!alarmDrawerOpen);
             }}
           >
             {camEnabled ? 'Turn off' : 'Turn on'}

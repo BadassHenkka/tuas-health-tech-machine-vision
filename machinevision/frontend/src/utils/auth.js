@@ -1,10 +1,26 @@
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 // Setup config with token
 export const headersConfigWithToken = (token) => {
   // Headers
   const config = {
     headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  };
+
+  return config;
+};
+
+export const headersConfigWithTokenAndCookie = (token) => {
+  axios.defaults.xsrfCookieName = 'csrftoken';
+  axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+
+  const config = {
+    headers: {
+      'X-CSRFTOKEN': cookie.load('csrftoken'),
       'Content-Type': 'application/json',
       Authorization: `Token ${token}`,
     },

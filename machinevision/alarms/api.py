@@ -30,9 +30,18 @@ class AlarmAPIViewSet(generics.ListCreateAPIView):
     return Response(serializer.data)
 
 
-class AlarmAPIDetail(generics.RetrieveUpdateDestroyAPIView):
+class AlarmAPIDetail(generics.RetrieveUpdateAPIView):
   permission_classes = [
       IsAuthenticated,
   ]
   serializer_class = AlarmSerializer
   queryset = Alarm.objects.all()
+
+  def update(request, *args, **kwargs):
+    alarm = request.get_object()
+    alarm.acknowledged = not alarm.acknowledged # save opposite of current value
+    alarm.save()
+
+    serializer = AlarmSerializer(alarm)
+
+    return Response(serializer.data)

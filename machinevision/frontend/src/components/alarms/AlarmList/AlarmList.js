@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import AlarmCard from '../AlarmCard/AlarmCard';
-import { alarmDrawerWidth } from '../../../constants';
+import { fetchAlarmList } from '../../../utils/alarms';
+import { authTokenState } from '../../../store';
+import { alarmDrawerWidth, alarmCheckInterval } from '../../../constants';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -28,63 +33,79 @@ const useStyles = makeStyles((theme) => ({
   drawerHeaderText: {
     fontWeight: 'bold',
   },
+  centerAndMt: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  errorMsg: {
+    width: '80%',
+    marginTop: 20,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 }));
-
-const alarmData = [
-  {
-    created_at: '10:00',
-    message: 'Aaargh Alert!',
-    acknowledged: false,
-  },
-  {
-    created_at: '11:00',
-    message: 'Blaargh Alert!',
-    acknowledged: false,
-  },
-  {
-    created_at: '12:00',
-    message: 'Wooaaah Alert!',
-    acknowledged: false,
-  },
-  {
-    created_at: '13:00',
-    message: 'Gaassh Alert!',
-    acknowledged: true,
-  },
-  {
-    created_at: '14:00',
-    message: 'Brraap Alert!',
-    acknowledged: true,
-  },
-  {
-    created_at: '15:00',
-    message: 'Aaargh Alert!',
-    acknowledged: true,
-  },
-  {
-    created_at: '16:00',
-    message: 'Blaargh Alert!',
-    acknowledged: true,
-  },
-  {
-    created_at: '17:00',
-    message: 'Wooaaah Alert!',
-    acknowledged: true,
-  },
-  {
-    created_at: '18:00',
-    message: 'Gaassh Alert!',
-    acknowledged: true,
-  },
-  {
-    created_at: '19:00',
-    message: 'Brraap Alert!',
-    acknowledged: true,
-  },
-];
 
 const AlarmList = ({ open }) => {
   const classes = useStyles();
+  const authToken = useRecoilValue(authTokenState).token;
+  const {
+    data: alarmData,
+    refetch: refetchAlarms,
+    isLoading: loadingAlarms,
+    isError: isAlarmsFetchError,
+    error: alarmFetchError,
+  } = useQuery(
+    'alarmData',
+    () => {
+      if (open) {
+        return fetchAlarmList(authToken);
+      }
+    },
+    // interval for refetching/checking for new alarms
+    { refetchInterval: alarmCheckInterval }
+  );
+
+  useEffect(() => {
+    if (open) {
+      refetchAlarms();
+    }
+  }, [open]);
+
+  let DrawerContent = () => {
+    if (loadingAlarms) {
+      return (
+        <div className={classes.centerAndMt}>
+          <CircularProgress />
+        </div>
+      );
+    }
+
+    if (isAlarmsFetchError) {
+      let errorMsg = `${alarmFetchError.message}`;
+      return (
+        <div className={classes.errorMsg}>
+          <strong>Error fetching the alarms:</strong>
+          <p>{errorMsg}</p>
+        </div>
+      );
+    }
+
+    return (
+      <List>
+        {!!alarmData &&
+          alarmData.data.map((alarm) => {
+            return (
+              <AlarmCard
+                key={alarm.created_at}
+                alarm={alarm}
+                authToken={authToken}
+              />
+            );
+          })}
+      </List>
+    );
+  };
 
   return (
     <Drawer
@@ -101,11 +122,7 @@ const AlarmList = ({ open }) => {
         <Typography className={classes.drawerHeaderText}>ALARMS</Typography>
       </div>
       <Divider />
-      <List>
-        {alarmData.map((alarm) => {
-          return <AlarmCard key={alarm.created_at} alarm={alarm} />;
-        })}
-      </List>
+      <DrawerContent />
     </Drawer>
   );
 };

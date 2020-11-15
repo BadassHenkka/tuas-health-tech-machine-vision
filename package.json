@@ -43,7 +43,9 @@
     "react": "^16.13.1",
     "react-alert": "^7.0.2",
     "react-alert-template-basic": "^1.0.0",
+    "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
+    "react-query": "^2.26.2",
     "react-router-dom": "^5.2.0",
     "react-webcam": "^5.2.0",
     "recoil": "0.0.13"
