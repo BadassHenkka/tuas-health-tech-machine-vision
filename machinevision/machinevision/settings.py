@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
     # Project django apps
     'accounts',
+    'alarms',
     'frontend',
 ]
 

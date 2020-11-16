@@ -22,10 +22,15 @@ List all changes after the last release here (newer on top). Each change on a se
 - Add webpack configuration for CSS
 - Add basic CSS reset and test a placeholder background image for DashboardView
 - Add more info and improve README.md
+- Create alarms django app, Alarm model, serializer and API view
+- Add a Drawer with AlarmList and AlarmCard components
+- Add fetching and updating alarm data from API using react-query
 
 ### Changed
 
 - Change folder structure - each component has its own folder with the JS file and CSS file
+- Remove python version requirement from pipfile
+- Don't create a token when registering and modify what's shown in the UserAdmin
 
 ### Fixed
 

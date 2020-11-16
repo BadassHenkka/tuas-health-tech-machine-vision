@@ -2,6 +2,7 @@ import React, { Fragment, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot, useRecoilValue } from 'recoil';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
@@ -20,6 +21,9 @@ import Register from './components/accounts/Register/Register';
 const alertOptions = {
   timeout: 4000,
   position: 'top center',
+  containerStyle: {
+    zIndex: 10000,
+  },
 };
 
 const AppContainer = () => {
@@ -60,14 +64,18 @@ const AppContainer = () => {
   );
 };
 
+const queryCache = new QueryCache();
+
 const App = () => {
   return (
     <RecoilRoot>
-      <AlertProvider template={AlertTemplate} {...alertOptions}>
-        <Suspense fallback={<Loader />}>
-          <AppContainer />
-        </Suspense>
-      </AlertProvider>
+      <ReactQueryCacheProvider queryCache={queryCache}>
+        <AlertProvider template={AlertTemplate} {...alertOptions}>
+          <Suspense fallback={<Loader />}>
+            <AppContainer />
+          </Suspense>
+        </AlertProvider>
+      </ReactQueryCacheProvider>
     </RecoilRoot>
   );
 };
