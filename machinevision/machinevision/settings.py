@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'accounts',
     'alarms',
     'frontend',
+    'streaming',
 ]
 
 REST_FRAMEWORK = {
