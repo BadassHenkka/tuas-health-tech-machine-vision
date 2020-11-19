@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
      },
 }));
 
-const DashboardView = ({ isAuthenticated }) => {
+const DashboardView = ({ user, isAuthenticated }) => {
   if (!isAuthenticated) {
     return <Redirect to='/login' />;
   }
@@ -68,6 +68,7 @@ const DashboardView = ({ isAuthenticated }) => {
     setTimeout(() => {
       setCamEnabled(false);
       setCamBtnDisabled(false);
+      window.location.reload();
     }, cameraGrowTimeout);
   };
 
@@ -86,7 +87,7 @@ const DashboardView = ({ isAuthenticated }) => {
           alignItems='center'
           style={{ minHeight: '80vh' }}
         >
-          <WebcamStream grow={grow} camEnabled={camEnabled} />
+          <WebcamStream user={user} grow={grow} camEnabled={camEnabled} />
           <Button
             disabled={camBtnDisabled}
             className={classes.cameraButton}
