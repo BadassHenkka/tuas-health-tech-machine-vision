@@ -16,6 +16,7 @@ import HeaderMenuBar from './components/layout/HeaderMenuBar/HeaderMenuBar';
 import Loader from './components/layout/Loader/Loader';
 import Login from './components/accounts/Login/Login';
 import Register from './components/accounts/Register/Register';
+import Footer from './components/layout/Footer/Footer';
 
 // Alert Options
 const alertOptions = {
@@ -35,6 +36,7 @@ const AppContainer = () => {
         <HeaderMenuBar userState={userState} />
         <Alerts />
         <Container>
+          <div>
           <Switch>
             <Route
               exact
@@ -58,6 +60,8 @@ const AppContainer = () => {
               )}
             />
           </Switch>
+          <Footer/>
+          </div>
         </Container>
       </Fragment>
     </Router>

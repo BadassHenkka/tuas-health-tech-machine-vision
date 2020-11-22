@@ -30,8 +30,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: alarmDrawerWidth,
   },
   cameraButton: {
-    marginTop: 10,
-  },
+    marginTop: 100,
+    backgroundColor: '#0d003f',
+    color: 'white',
+     '&:hover': {
+      color: '#eae527',
+      background: '#0d003f',
+        }
+     },
 }));
 
 const DashboardView = ({ isAuthenticated }) => {
@@ -85,12 +91,12 @@ const DashboardView = ({ isAuthenticated }) => {
             disabled={camBtnDisabled}
             className={classes.cameraButton}
             variant='contained'
-            color='primary'
+            size='large'
             onClick={() => {
               camEnabled === false ? handleCameraOn() : handleCameraOff();
             }}
           >
-            {camEnabled ? 'Turn off' : 'Turn on'}
+            {camEnabled ? 'Camera off' : 'Camera on'}
           </Button>
         </Grid>
       </main>
