@@ -36,7 +36,6 @@ const AppContainer = () => {
         <HeaderMenuBar userState={userState} />
         <Alerts />
         <Container>
-          <div>
           <Switch>
             <Route
               exact
@@ -60,8 +59,7 @@ const AppContainer = () => {
               )}
             />
           </Switch>
-          <Footer/>
-          </div>
+          <Footer />
         </Container>
       </Fragment>
     </Router>

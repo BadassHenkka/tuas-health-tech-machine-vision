@@ -10,3 +10,9 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
 }
+
+html,
+body,
+html * {
+  font-family: 'Roboto', sans-serif;
+}

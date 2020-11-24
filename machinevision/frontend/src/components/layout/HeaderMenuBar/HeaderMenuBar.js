@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -33,24 +32,23 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 10,
     backgroundColor: 'white',
     color: '#0d003f',
-     '&:hover': {
+    '&:hover': {
       color: '#0d003f',
       background: '#eae527',
-        }
+    },
   },
   buttonLogout: {
     backgroundColor: 'red',
     color: 'white',
-     '&:hover': {
+    '&:hover': {
       color: '#0d003f',
       background: 'red',
-        }
+    },
   },
-   rightName: {
+  rightName: {
     marginRight: 10,
     color: '#eae527',
   },
-
 }));
 
 const HeaderMenuBar = ({ userState }) => {
@@ -96,21 +94,24 @@ const HeaderMenuBar = ({ userState }) => {
           </Link>
           {userState.isAuthenticated && (
             <>
-              <Typography className={classes.rightName} >
+              <Typography className={classes.rightName}>
                 Logged in as {userState.user.username}
               </Typography>
+              {/* TODO: Add account view and direct there on click */}
               <Button
                 className={classes.buttonAccount}
-                onClick={onLogoutClick}
+                onClick={() => alert('Go to account view!')}
                 variant='contained'
                 size='small'
               >
                 Account
               </Button>
-              <Button onClick={onLogoutClick}
+              <Button
+                onClick={onLogoutClick}
                 className={classes.buttonLogout}
                 variant='contained'
-                size='small'>
+                size='small'
+              >
                 Log out
               </Button>
             </>
