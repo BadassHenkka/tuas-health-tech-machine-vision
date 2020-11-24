@@ -31,6 +31,7 @@ List all changes after the last release here (newer on top). Each change on a se
 - Change folder structure - each component has its own folder with the JS file and CSS file
 - Remove python version requirement from pipfile
 - Don't create a token when registering and modify what's shown in the UserAdmin
+- Overall style changes for HeaderMenuBar and DashboardView
 
 ### Fixed
 

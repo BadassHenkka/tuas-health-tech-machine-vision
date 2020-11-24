@@ -18,12 +18,36 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: '#0d003f',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  buttonAccount: {
+    marginRight: 10,
+    backgroundColor: 'white',
+    color: '#0d003f',
+    '&:hover': {
+      color: '#0d003f',
+      background: '#eae527',
+    },
+  },
+  buttonLogout: {
+    backgroundColor: 'red',
+    color: 'white',
+    '&:hover': {
+      color: '#0d003f',
+      background: 'red',
+    },
+  },
+  rightName: {
+    marginRight: 10,
+    color: '#eae527',
   },
 }));
 
@@ -66,12 +90,28 @@ const HeaderMenuBar = ({ userState }) => {
             variant='h6'
             className={classes.title}
           >
-            Health Tech Lab - Machine Vision
+            Health Tech Lab - Machine vision
           </Link>
           {userState.isAuthenticated && (
             <>
-              <Typography>{userState.user.username}</Typography>
-              <Button onClick={onLogoutClick} color='inherit'>
+              <Typography className={classes.rightName}>
+                Logged in as {userState.user.username}
+              </Typography>
+              {/* TODO: Add account view and direct there on click */}
+              <Button
+                className={classes.buttonAccount}
+                onClick={() => alert('Go to account view!')}
+                variant='contained'
+                size='small'
+              >
+                Account
+              </Button>
+              <Button
+                onClick={onLogoutClick}
+                className={classes.buttonLogout}
+                variant='contained'
+                size='small'
+              >
                 Log out
               </Button>
             </>
