@@ -1,8 +1,15 @@
 import logging
 import time
 import cv2
-from tf_pose.estimator import TfPoseEstimator
-from tf_pose.networks import get_graph_path
+
+import importlib.util
+
+# Make a custom module out of estimator.py so we can import our own modified TFPoseEstimator code
+spec = importlib.util.spec_from_file_location("module.name", "streaming/estimator.py")
+estimator = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(estimator)
+
+from tf_pose.networks import get_graph_path, model_wh
 import GPUtil
 
 from alarms.models import Alarm
@@ -16,7 +23,6 @@ formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(levelname)s] %(messag
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
-
 class VideoCamera(object):
   def __init__(self):
     self.cam = cv2.VideoCapture(0)
@@ -29,26 +35,24 @@ class VideoCamera(object):
     ret_val, image = cam.read()
 
     try:
-      # First check for Nvidia GPU with gputil
-      # If nvidia GPU is available -> pose estimation will run
-      deviceID = GPUtil.getFirstAvailable()
+      logger.debug('initialization %s : %s' % ('mobilenet_v2_small', 'streaming/mobilenet_v2_small/graph_opt.pb'))
 
-      logger.debug('initialization %s : %s' % ('mobilenet_thin', get_graph_path('mobilenet_thin')))
-      e = TfPoseEstimator(get_graph_path('mobilenet_thin'), target_size=(432, 368), trt_bool=False)
+      w, h = model_wh('432x368')
+      e = estimator.TfPoseEstimator('streaming/mobilenet_v2_small/graph_opt.pb', target_size=(w, h), trt_bool=False)
+
       logger.debug('cam read+')
 
       count = 0
       y1 = [0,0]
       frame = 0
       fps_time = 0
-      w, h = 432, 368
 
-      i =1
-      count+=1
+      i = 1
+      count += 1
 
       humans = e.inference(image, resize_to_default=(w > 0 and h > 0))
       # In humans total num of detected person in frame
-      image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
+      image = estimator.TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
 
       for human in humans:
         # we select one person from num of person
@@ -88,11 +92,8 @@ class VideoCamera(object):
 
       return jpeg.tobytes()
     except:
-      # if there's no Nvidia GPU available
-      # try block will fail and the pose estimation won't run
-      # so we'll just return regular camera image
       cv2.putText(image,
-        "No NVIDIA GPU detected - pose estimation is not running",
+        "Error while trying to run detection - pose estimation is not running",
         (10, 15),  cv2.FONT_HERSHEY_SIMPLEX, 0.5,
         (0, 0, 255), 2)
 
