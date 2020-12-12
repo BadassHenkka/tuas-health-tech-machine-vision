@@ -32,13 +32,13 @@ Backend is done with Django and Django REST framework where we have API endpoint
 
 Django is a Python framework for web development. If you are unfamiliar with Django and Django REST Framework, I strongly recommend going through the tutorial links below to get familiar with how Django works and how Django projects are generally structured.
 
-[Django](https://www.djangoproject.com/)
-[Django tutorial](https://docs.djangoproject.com/en/3.1/intro/tutorial01/)
-[Django REST Framework](https://www.django-rest-framework.org/)
-[Django REST Framework tutorial](https://www.django-rest-framework.org/tutorial/1-serialization/)
+- [Django](https://www.djangoproject.com/)
+- [Django tutorial](https://docs.djangoproject.com/en/3.1/intro/tutorial01/)
+- [Django REST Framework](https://www.django-rest-framework.org/)
+- [Django REST Framework tutorial](https://www.django-rest-framework.org/tutorial/1-serialization/)
 
 Authentication:
-[Django REST Knox](https://www.django-rest-framework.org/api-guide/authentication/#django-rest-knox)
+- [Django REST Knox](https://www.django-rest-framework.org/api-guide/authentication/#django-rest-knox)
 
 ### 1.2 Frontend
 
@@ -49,33 +49,33 @@ This project also has a Webpack configuration file - `webpack.config.js` - which
 If you are unfamiliar with Javascript or React, I strongly recommend spending some time going through at least some basic tutorials before delving into this project's code. While React components can be written as class components, in this project all the code is written as functional components using React Hooks.
 
 Example tutorials for JS & React:
-[JavaScript for Beginners Course (2020) - Colt Steele](https://www.youtube.com/watch?v=x2RNw4M6cME&ab_channel=ColtSteele)
-[Beginner's Guide to React w/ Hooks (2020) Free Course](https://www.youtube.com/watch?v=9U3IhLAnSxM&t=7542s&ab_channel=ColtSteele)
+- [JavaScript for Beginners Course (2020) - Colt Steele](https://www.youtube.com/watch?v=x2RNw4M6cME&ab_channel=ColtSteele)
+- [Beginner's Guide to React w/ Hooks (2020) Free Course](https://www.youtube.com/watch?v=9U3IhLAnSxM&t=7542s&ab_channel=ColtSteele)
 
 React docs:
-[React](https://reactjs.org/)
+- [React](https://reactjs.org/)
 
 Many components use material-ui components:
-[Material-UI](https://material-ui.com/)
+- [Material-UI](https://material-ui.com/)
 
 Compiling Javascript and CSS with hot reloading:
-[Webpack](https://webpack.js.org/)
-[Babel](https://babeljs.io/)
+- [Webpack](https://webpack.js.org/)
+- [Babel](https://babeljs.io/)
 
 ### 1.3 Important frontend libraries and packages to understand for development
 
 If you're already familiar with React then you might be interested in how this project handles state management, routing and fetching data from APIs. Here's the libraries/packages used for those purposes:
 
 State management:
-[Recoil](https://recoiljs.org/)
-[Recoil tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
+- [Recoil](https://recoiljs.org/)
+- [Recoil tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
 
 Routing:
-[React Router](https://reactrouter.com/web/guides/quick-start)
+- [React Router](https://reactrouter.com/web/guides/quick-start)
 
 Fetching data from backend API endpoints:
-[Axios](https://www.npmjs.com/package/axios)
-[React Query](https://react-query.tanstack.com/docs/overview)
+- [Axios](https://www.npmjs.com/package/axios)
+- [React Query](https://react-query.tanstack.com/docs/overview)
 
 ## 2. Ideas, tutorials and sources used for the project development
 
@@ -83,13 +83,13 @@ Here are some of the sources used as inspiration when developing this project an
 
 ### 2.1 Combining Django and React
 
-[Brad Traversy - Full Stack React & Django](https://www.youtube.com/watch?v=Uyei2iDA4Hs&list=PLillGF-RfqbbRA-CIUxlxkUpbq0IFkX60&ab_channel=TraversyMedia)
+- [Brad Traversy - Full Stack React & Django](https://www.youtube.com/watch?v=Uyei2iDA4Hs&list=PLillGF-RfqbbRA-CIUxlxkUpbq0IFkX60&ab_channel=TraversyMedia)
 
 ### 2.2 Sources used for configuring webpack for React hot reload
 
-[Webpack setup with hot reloading](https://hackernoon.com/how-to-bring-live-reloading-back-to-a-django-and-react-project-ilf3ubm)
+- [Webpack setup with hot reloading](https://hackernoon.com/how-to-bring-live-reloading-back-to-a-django-and-react-project-ilf3ubm)
 
-[Configuring CSS with webpack](https://blog.jakoblind.no/css-modules-webpack/)
+- [Configuring CSS with webpack](https://blog.jakoblind.no/css-modules-webpack/)
 
 ## 3. Project installation and setup
 
