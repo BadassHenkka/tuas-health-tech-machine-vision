@@ -6,25 +6,25 @@ This is a project in the Turku University of Applied Sciences Health Technology 
 
 <!-- TOC -->
 
-- [1. Frameworks and packages used in the projet](#1-frameworks)
+- [1. Frameworks and packages used in the project](#1-frameworks-and-packages-used-in-the-project)
     - [1.1 Backend](#11-backend)
     - [1.2 Frontend](#12-frontend)
-    - [1.2.1 Important frontend libraries & packages to understand for development](#121-important-front-libraries-packages)
-- [2. Ideas, tutorials and sources used for the project development](#2-ideas-tutorials-inspiration)
+    - [1.3 Important frontend libraries and packages to understand for development](#13-important-frontend-libraries-and-packages-to-understand-for-development)
+- [2. Ideas, tutorials and sources used for the project development](#2-ideas,-tutorials-and-sources-used-for-the-project-development)
     - [2.1 Combining Django and React](#21-combining-django-and-react)
-    - [2.2 Sources used for configuring webpack for React hot reload](#22-django-react-webpack-hot-reload)
-- [3. Project installation and setup](#3-install-and-setup)
+    - [2.2 Sources used for configuring webpack for React hot reload](#22-sources-used-for-configuring-webpack-for-react-hot-reload)
+- [3. Project installation and setup](#3-project-installation-and-setup)
     - [3.1 Requirements](#31-requirements)
     - [3.2 Create database](#32-create-database)
-    - [3.3 Configuring .env file](#33-env-file-config)
-    - [3.4 Installing Python packages](#34-install-python-packages)
-    - [3.5 Installing npm packages](#35-install-npm-packages)
+    - [3.3 Configuring .env file](#33-configuring-.env-file)
+    - [3.4 Installing Python packages](#34-installing-python-packages)
+    - [3.5 Installing npm packages](#35-installing-npm-packages)
     - [3.6 Running locally](#36-running-locally)
-    - [3.7 Making changes in JS & CSS files](#37-changes-in-js-css)
+    - [3.7 Making changes in JS & CSS files](#37-making-changes-in-js-&-css-files)
 
 <!-- /TOC -->
 
-## 1. Frameworks and packages used in the projet
+## 1. Frameworks and packages used in the project
 
 ### 1.1 Backend
 
@@ -62,7 +62,7 @@ Compiling Javascript and CSS with hot reloading:
 [Webpack](https://webpack.js.org/)
 [Babel](https://babeljs.io/)
 
-#### 1.2.1 Important frontend libraries & packages to understand for development
+### 1.3 Important frontend libraries and packages to understand for development
 
 If you're already familiar with React then you might be interested in how this project handles state management, routing and fetching data from APIs. Here's the libraries/packages used for those purposes:
 
