@@ -2,58 +2,98 @@
 
 ## Project information
 
-This is a project in Turku University of Applied Sciences Health Technology lab. This website works as an interface where users can register and request access for a camera stream coming through a Jetson Nano which can read human body positions and alert if something unusual happens.
+This is a project in the Turku University of Applied Sciences Health Technology lab. This website works as an interface where users can register and gain access to a camera stream coming from an application that estimates human body positions and alerts the user if something unusual happens, like for example a fall is detected.
 
-## Technologies used in the project
+<!-- TOC -->
 
-### Backend
+- [1. Frameworks and packages used in the projet](#1-frameworks)
+    - [1.1 Backend](#11-backend)
+    - [1.2 Frontend](#12-frontend)
+    - [1.2.1 Important frontend libraries & packages to understand for development](#121-important-front-libraries-packages)
+- [2. Ideas, tutorials and sources used for the project development](#2-ideas-tutorials-inspiration)
+    - [2.1 Combining Django and React](#21-combining-django-and-react)
+    - [2.2 Sources used for configuring webpack for React hot reload](#22-django-react-webpack-hot-reload)
+- [3. Project installation and setup](#3-install-and-setup)
+    - [3.1 Requirements](#31-requirements)
+    - [3.2 Create database](#32-create-database)
+    - [3.3 Configuring .env file](#33-env-file-config)
+    - [3.4 Installing Python packages](#34-install-python-packages)
+    - [3.5 Installing npm packages](#35-install-npm-packages)
+    - [3.6 Running locally](#36-running-locally)
+    - [3.7 Making changes in JS & CSS files](#37-changes-in-js-css)
 
-Backend is done with Django and Django REST framework where we have API endpoints that are consumed by the frontend Django app built with React which then handles all the frontend views.
+<!-- /TOC -->
+
+## 1. Frameworks and packages used in the projet
+
+### 1.1 Backend
+
+Backend is done with Django and Django REST framework where we have API endpoints that are consumed by the frontend Django app built with React which then handles all the frontend views. One exception is `/admin` which lets you access standard Django admin views.
+
+Django is a Python framework for web development. If you are unfamiliar with Django and Django REST Framework, I strongly recommend going through the tutorial links below to get familiar with how Django works and how Django projects are generally structured.
 
 [Django](https://www.djangoproject.com/)
+[Django tutorial](https://docs.djangoproject.com/en/3.1/intro/tutorial01/)
 [Django REST Framework](https://www.django-rest-framework.org/)
+[Django REST Framework tutorial](https://www.django-rest-framework.org/tutorial/1-serialization/)
 
 Authentication:
 [Django REST Knox](https://www.django-rest-framework.org/api-guide/authentication/#django-rest-knox)
 
-### Frontend
+### 1.2 Frontend
 
-The Django frontend app has one template in `frontend/templates/frontend/index.html` where the compiled Javascript and CSS is inserted.
+This project has a Django app named frontend. You can find the app folder under `machinevision/frontend` and in that folder you'll find a folder named `src` which contains all the React code which handles the frontend views. Routing is handled by React Router. The Django frontend app has one template in `frontend/templates/frontend/index.html` where the compiled Javascript and CSS is inserted.
 
+This project also has a Webpack configuration file - `webpack.config.js` - which is configured to automatically compile the React code and refresh the view whenever you make changes and save. This is called hot reloading. The same applies when you make changes to `.css` files. Adding images should work as well. All the frontend code gets compiled under `/machinevision/frontend/static/frontend` folder.
+
+If you are unfamiliar with Javascript or React, I strongly recommend spending some time going through at least some basic tutorials before delving into this project's code. While React components can be written as class components, in this project all the code is written as functional components using React Hooks.
+
+Example tutorials for JS & React:
+[JavaScript for Beginners Course (2020) - Colt Steele](https://www.youtube.com/watch?v=x2RNw4M6cME&ab_channel=ColtSteele)
+[Beginner's Guide to React w/ Hooks (2020) Free Course](https://www.youtube.com/watch?v=9U3IhLAnSxM&t=7542s&ab_channel=ColtSteele)
+
+React docs:
 [React](https://reactjs.org/)
 
-UI components:
+Many components use material-ui components:
 [Material-UI](https://material-ui.com/)
-
-React state management:
-[Recoil](https://recoiljs.org/)
-
-Fetching data from backend API endpoints:
-[Axios](https://www.npmjs.com/package/axios)
 
 Compiling Javascript and CSS with hot reloading:
 [Webpack](https://webpack.js.org/)
 [Babel](https://babeljs.io/)
 
-## Ideas, tutorials and inspiration used for the project
+#### 1.2.1 Important frontend libraries & packages to understand for development
 
-### Combining Django and React
+If you're already familiar with React then you might be interested in how this project handles state management, routing and fetching data from APIs. Here's the libraries/packages used for those purposes:
+
+State management:
+[Recoil](https://recoiljs.org/)
+[Recoil tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
+
+Routing:
+[React Router](https://reactrouter.com/web/guides/quick-start)
+
+Fetching data from backend API endpoints:
+[Axios](https://www.npmjs.com/package/axios)
+[React Query](https://react-query.tanstack.com/docs/overview)
+
+## 2. Ideas, tutorials and sources used for the project development
+
+Here are some of the sources used as inspiration when developing this project and specifically combining Django and React in this way.
+
+### 2.1 Combining Django and React
 
 [Brad Traversy - Full Stack React & Django](https://www.youtube.com/watch?v=Uyei2iDA4Hs&list=PLillGF-RfqbbRA-CIUxlxkUpbq0IFkX60&ab_channel=TraversyMedia)
 
-### Using Recoil for React state management
-
-[Recoil tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
-
-### Sources for configuring webpack
+### 2.2 Sources used for configuring webpack for React hot reload
 
 [Webpack setup with hot reloading](https://hackernoon.com/how-to-bring-live-reloading-back-to-a-django-and-react-project-ilf3ubm)
 
 [Configuring CSS with webpack](https://blog.jakoblind.no/css-modules-webpack/)
 
-## Setting up project locally
+## 3. Project installation and setup
 
-### Requirements
+### 3.1 Requirements
 
 Fork this repository and then clone it into your projects folder. For this project you need:
 
@@ -62,11 +102,11 @@ Fork this repository and then clone it into your projects folder. For this proje
 - [NodeJS](https://nodejs.org/en/)
 - Some database engine (relational db) installed in your system ie. postgres or mysql
 
-### Create database
+### 3.2 Create database
 
 Create a new database for the project.
 
-### Configuring .env file
+### 3.3 Configuring .env file
 
 Copy the .env.template file and rename it to .env . Configure it as is instructed in the template file. The main thing is to configure the DATABASE_URL as it is there where you define the project database engine, database name and username/password for it.
 
@@ -76,15 +116,15 @@ For database engine we recommend [postgres](https://www.postgresql.org/)
 
 While not required for this project, if you are unfamiliar with running database commands through the terminal, then you might want to install [pgAdmin](https://www.pgadmin.org/) which is a browser based UI for creating and handling postgres databases.
 
-### Python packages
+### 3.4 Installing Python packages
 
 Navigate to the project folder - ie. `tuas-health-tech-machine-vision/` - in your terminal and run `pipenv shell` to activate the pipenv virtual environment for this project. Next, install the required python packages with `pipenv install`. If you need to install additional Python packages for this project, run `pipenv install <package>` and they will be added to the Pipfile as dependencies. This means the packages will be installed only in this project's virtual environment and not globally in your machine.
 
-### npm packages
+### 3.5 Installing npm packages
 
 Next run `npm install` to install all the required npm packages from package.json.
 
-### Running locally
+### 3.6 Running locally
 
 In the project folder where we have the package.json file, run the command `npm run dev`. This will create a new folder machinevision/frontend/static/frontend, build all the JS files into a main.js file under this folder and also compile any assets like images into this folder as well. Leave this terminal window open.
 
@@ -98,7 +138,7 @@ If you for example run `python manage.py runserver 0.0.0.0:8888`, it will run in
 
 You can use the register page to create a regular user. If you want to access the /admin page, then you can run `python manage.py createsuperuser` to create a superuser and login to the admin panel using the created credentials.
 
-### Making changes in Javascript files (React.js)
+### 3.7 Making changes in JS & CSS files
 
 If you make changes in the Javascript files, besides having the django server running in a terminal, you need to have another terminal open where you have the `npm run dev` command running. This command builds the JS files and has webpack keep an eye on any changes and builds the files again automatically when you save.
 
