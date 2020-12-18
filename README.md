@@ -10,25 +10,25 @@ This is a project in the Turku University of Applied Sciences Health Technology 
     - [1.1 Backend](#11-backend)
     - [1.2 Frontend](#12-frontend)
     - [1.3 Important frontend libraries and packages to understand for development](#13-important-frontend-libraries-and-packages-to-understand-for-development)
-- [2. Ideas, tutorials and sources used for the project development](#2-ideas,-tutorials-and-sources-used-for-the-project-development)
+- [2. Ideas, tutorials and sources used for the project development](#2-ideas-tutorials-and-sources-used-for-the-project-development)
     - [2.1 Combining Django and React](#21-combining-django-and-react)
     - [2.2 Sources used for configuring webpack for React hot reload](#22-sources-used-for-configuring-webpack-for-react-hot-reload)
 - [3. Project installation and setup](#3-project-installation-and-setup)
     - [3.1 Requirements](#31-requirements)
     - [3.2 Installing Postgres](#32-installing-postgres)
     - [3.3 Create database](#33-create-database)
-    - [3.4 Configuring .env file](#34-configuring-.env-file)
+    - [3.4 Configuring .env file](#34-configuring-env-file)
     - [3.5 Installing Python packages](#35-installing-python-packages)
     - [3.6 Installing npm packages](#36-installing-npm-packages)
     - [3.7 Running locally](#37-running-locally)
-    - [3.8 Making changes in JS & CSS files](#38-making-changes-in-js-&-css-files)
-- [4. General information regardig project structure](#4-general-information-regarding-project-structure)
-    - [4.1 `tuas-health-tech-machine-vision/`](#41-`tuas-health-tech-machine-vision/`)
-    - [4.2 `../machinevision/`](#42-`../machinevision/`)
-    - [4.3 `../machinevision/machinevision/`](#43-`../machinevision/machinevision/`)
-    - [4.4 `../machinevision/accounts/`](#44-`../machinevision/accounts/`)
-    - [4.5 `../machinevision/alarms/`](#45-`../machinevision/alarms/`)
-    - [4.6 `../machinevision/frontend/`](#46-`../machinevision/frontend/`)
+    - [3.8 Making changes in JS and CSS files](#38-making-changes-in-js-and-css-files)
+- [4. General information regarding project structure](#4-general-information-regarding-project-structure)
+    - [4.1 `tuas-health-tech-machine-vision/`](#41-tuas-health-tech-machine-vision)
+    - [4.2 machinevision root directory](#42-machinevision-root-directory)
+    - [4.3 machinevision](#43-machinevision)
+    - [4.4 accounts](#44-accounts)
+    - [4.5 alarms](#45-alarms)
+    - [4.6 frontend](#46-frontend)
 - [5. Future development](#5-future-development)
 
 <!-- /TOC -->
@@ -160,13 +160,13 @@ You can find Django's documentation related to manage.py commands in here:
 
 You can use the register page to create a regular user but by default you won't be able to login because in this project it has been made so that the admin first needs to activate this user. To create an admin user, you can run `python manage.py createsuperuser` to create a superuser and login to the admin panel using the created credentials. You can access the admin site through `/admin`.
 
-### 3.8 Making changes in JS & CSS files
+### 3.8 Making changes in JS and CSS files
 
 If you make changes in the Javascript files, besides having the django server running in a terminal, you need to have another terminal open where you have the `npm run dev` command running. This command builds the JS & CSS files and has webpack keep an eye on any changes and builds the files again automatically when you save.
 
 The files will be built under `machinevision/frontend/static/frontend/` into a file named `main.js`. This file is configured to be ignored by git in the .gitignore file because there can be huge changes in the file even if you do just small changes in the React files. The compiled file will also always have some differences based on the user and their personal file structure on their operating system.
 
-### 4. General information regardig project structure
+## 4. General information regarding project structure
 
 As mentioned earlier, if you're not familiar with Django and Django REST Framework, then I recommend going through the tutorials first to gain a better understanding on how the project is structured and what each file is for. Here I will briefly describe the contents of each folder in this project.
 
@@ -180,23 +180,33 @@ For the Javascript and CSS compiling we have the .babelrc and webpack.config.js 
 
 Finally the CHANGELOG can be used to follow what changes have been done over time. The file itself contains links to instructions on how to use it.
 
-### 4.2 `../machinevision/`
+### 4.2 machinevision root directory
+
+`tuas-health-tech-machine-vision/machinevision`
 
 This is the root directory which is a container for the Django project. Under this folder we have all the folders created by Django when initially creating a Django project. The .env.template file is the important one as it is used for configuring the project in your local environment. Also when running the `python manage.py <some-command>` command in terminal, make sure to be in this folder as the `manage.py` file is in this folder.
 
-### 4.3 `../machinevision/machinevision/`
+### 4.3 machinevision
+
+`tuas-health-tech-machine-vision/machinevision/machinevision/`
 
 This is the actual Python package for this project. Important files here are `settings.py` and `urls.py`. Settings contains of course all the Django related project settings. Urls contains the project urls. If you add new Django apps to the project, you need to remember to add the app in the settings file and also add any new urls in the urls file.
 
-### 4.4 `../machinevision/accounts/`
+### 4.4 accounts
+
+`tuas-health-tech-machine-vision/machinevision/accounts/`
 
 This app contains the API endpoints used for registration, login and handling things related to authentication. Important files are `urls.py`, `serializers.py` and `api.py`.
 
-### 4.5 `../machinevision/alarms/`
+### 4.5 alarms
+
+`tuas-health-tech-machine-vision/machinevision/alarms/`
 
 This app contains the API endpoints used for fetching alarms. The Alarm model is defined in `models.py`, and the API endpoints creation happens in `serializers.py` & `api.py`. Endpoint urls can be found in `urls.py`.
 
-### 4.6 `../machinevision/frontend/`
+### 4.6 frontend
+
+`tuas-health-tech-machine-vision/machinevision/frontend/`
 
 As the name suggests, this app handles all the frontend views. The important python files are `urls.py` where we basically give just a single view as the index url and that view is in `views.py`. In `views.py` we have just one view function that serves a template from `templates/frontend/index.html`. If you look into that index.html, you'll notice that we just load some fonts and Javascript there and then we have this `<div id="app"></div>` tag with the id "app". It is in this tag that the React application is initialized.
 
@@ -206,7 +216,7 @@ Utils folder is basically for any kind of utility functions that might be used i
 
 State folder contains different files for handling global React state, meaning state that you might need to use in several different places. This project uses recoil state management library for state management which is meant specifically for React state management. Note that all these states are then imported and exported in `store.js` file. The idea was that you could then easily import whatever state you need from a single place. This might be a bit unnecessary though so it could be changed.
 
-### 5. Future development
+## 5. Future development
 
 The next step for this website project should be adding a possibility to connect to another machine which would run the machinevision application and stream the video out. This could be handled for example through the use of websockets.
 
